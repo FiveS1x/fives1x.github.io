@@ -14,9 +14,3 @@ window.onscroll = function () {
 };
 
 var navLink = document.querySelectorAll(".nav-item");
-
-for (let index = 0; index < navLink.length - 1; index++) {
-  navLink[index].onclick = function () {
-    scrollTo(index * headerHight + "px");
-  };
-}
