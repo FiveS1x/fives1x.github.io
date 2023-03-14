@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  outline: none;
 }
 body {
   background-color: skyblue;
@@ -23,10 +24,12 @@ body {
   width: 100%;
 }
 nav {
+  font-weight: bold;
   color: white;
   z-index: 100;
 }
 nav .navbar-brand {
+  font-weight: normal;
   font-family: "PerfectMoment";
   font-size: 2rem;
 }
@@ -49,7 +52,7 @@ nav .dropdown-menu {
 }
 header {
   width: 100%;
-  background-color: skyblue;
+  background-image: linear-gradient(pink, 60%, skyblue);
   height: 100vh;
 }
 header .typing {
@@ -58,7 +61,7 @@ header .typing {
   font-size: 30vh;
   user-select: none;
   font-family: "PerfectMoment";
-  text-shadow: 0 0 32px pink;
+  animation: flash 4s infinite;
   color: white;
 }
 @media (min-width: 992px) {
@@ -68,19 +71,48 @@ header .typing {
   }
 }
 @keyframes flash {
+  0% {
+    text-shadow: 0 0 20px pink;
+  }
+  50% {
+    text-shadow: 0 0 50px skyblue;
+  }
   100% {
-    border-color: transparent;
+    text-shadow: 0 0 20px pink;
   }
 }
 section {
-  margin-bottom: 40px;
+  margin-bottom: 8rem;
 }
-section h2 {
+section .title h2 {
   font-size: 2rem;
   text-align: center;
   font-family: "得意黑";
   color: #fff;
+}
+section .title h3 {
+  font-size: 1rem;
+  text-align: center;
+  font-family: "得意黑";
+  color: #fff;
   margin-bottom: 30px;
+}
+@media (min-width: 992px) {
+  section .title h2 {
+    font-size: 4rem;
+    text-align: center;
+    font-family: "得意黑";
+    color: #fff;
+    margin-bottom: 0px;
+  }
+  section .title h3 {
+    font-size: 2.8rem;
+    text-align: center;
+    font-family: "得意黑";
+    color: #fff;
+    opacity: 0.6;
+    margin-bottom: 30px;
+  }
 }
 .recentlyWork {
   width: 80vw;
