@@ -4,7 +4,7 @@
   outline: none;
 }
 body {
-  background-color: skyblue;
+  background-color: #194c78;
 }
 @font-face {
   font-family: "PerfectMoment";
@@ -49,10 +49,11 @@ nav .navbar-brand {
 nav .dropdown-menu {
   left: -45px;
   border: 0;
+  text-align: center;
 }
 header {
   width: 100%;
-  background-image: linear-gradient(pink, 60%, skyblue);
+  background-image: linear-gradient(#2eb5fd, #194c78);
   height: 100vh;
 }
 header .typing {
@@ -61,7 +62,7 @@ header .typing {
   font-size: 30vh;
   user-select: none;
   font-family: "PerfectMoment";
-  animation: flash 4s infinite;
+  text-shadow: 0 0 20px white;
   color: white;
 }
 @media (min-width: 992px) {
@@ -70,19 +71,13 @@ header .typing {
     font-size: 15rem;
   }
 }
-@keyframes flash {
-  0% {
-    text-shadow: 0 0 20px pink;
-  }
-  50% {
-    text-shadow: 0 0 50px skyblue;
-  }
-  100% {
-    text-shadow: 0 0 20px pink;
-  }
-}
 section {
+  width: 80vw;
+  margin: 0 auto;
   margin-bottom: 8rem;
+}
+section .title {
+  margin-bottom: 4rem;
 }
 section .title h2 {
   font-size: 2rem;
@@ -111,13 +106,10 @@ section .title h3 {
     font-family: "得意黑";
     color: #fff;
     opacity: 0.6;
-    margin-bottom: 30px;
   }
 }
 .recentlyWork {
   width: 80vw;
-  margin-left: auto;
-  margin-right: auto;
 }
 .recentlyWork .content {
   display: flex;
@@ -139,10 +131,14 @@ section .title h3 {
     width: 80vw;
   }
 }
-.carousel {
-  width: 80vw;
-  margin: 0 auto;
-  border-radius: 5px;
-  overflow: hidden;
+.widget .content {
+  display: flex;
+  justify-content: space-between;
+}
+.widget .content .info-box {
+  width: 25vw;
+}
+.widget .content .info-box img {
+  width: 100%;
 }
 /*# sourceMappingURL=./index.css.map */
