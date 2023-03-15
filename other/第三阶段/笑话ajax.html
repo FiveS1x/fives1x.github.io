@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .main {
+        width: 1200px;
+        margin: 0 auto;
+      }
+
+      .menu {
+        width: 620px;
+        height: 60px;
+        margin: 30px auto;
+        background-color: #f5f5f6;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+
+      .menu button {
+        display: block;
+        width: 40px;
+        height: 40px;
+        line-height: 42px;
+        border-radius: 5px;
+        font-size: 20;
+        border: 0;
+        color: #6373bd;
+        background-color: #fff;
+        cursor: pointer;
+        outline: none;
+      }
+
+      .menu button.active {
+        background-color: #4e6ef2;
+        color: #fff;
+      }
+
+      .main table {
+        margin: 0 auto;
+        margin-bottom: 50px;
+        width: 1110px;
+      }
+
+      .main table th {
+        height: 50px;
+        background-color: #e9ecef;
+        color: #495057;
+      }
+
+      .main table th,
+      .main table td {
+        border: 1px solid #dee2e6;
+      }
+
+      .main table td {
+        padding: 10px;
+        text-align: center;
+        vertical-align: top;
+        font-size: 16px;
+      }
+
+      .main table tr:nth-child(2n-1) {
+        background-color: #ececec;
+      }
+
+      .num {
+        width: 500px;
+        display: flex;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="menu">
+        <button><<</button>
+        <div class="num">
+          <button class="active">1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>4</button>
+          <button>5</button>
+          <button>6</button>
+          <button>7</button>
+          <button>8</button>
+          <button>9</button>
+          <button>10</button>
+        </div>
+        <button>>></button>
+      </div>
+      <table cellspacing="0"></table>
+    </div>
+  </body>
+  <script>
+    // Ajax作业-无刷新分页获取笑话
+    // 笑话接口文档地址:   https://www.alapi.cn/api/view/11
+
+    var objTable = document.querySelector("table");
+    var xhr = new XMLHttpRequest();
+    var page = 1;
+
+    function getRefresh(nowPage) {
+      xhr.open(
+        "GET",
+        "https://v2.alapi.cn/api/joke?token=YA0aIDNi0UFNnflH&num=10&page=" +
+          nowPage
+      );
+      xhr.send();
+      // 创建一个字符串 保存遍历出来的内容
+      var content = "<tr><th>序号</th><th>标题</th><th>内容</th></tr>";
+      xhr.onreadystatechange = function () {
+        if (xhr.status === 200 && xhr.readyState == 4) {
+          var res = xhr.responseText;
+          var data = JSON.parse(res).data;
+          console.log(xhr.responseText);
+          if (data !== null) {
+            // 序号
+            var a = 0;
+            // map遍历
+            content += data
+              .map(function (item) {
+                a++;
+                return `<tr><td width="50">${a}</td><td  width="50">${item.title}</td><td>${item.content}</td></tr>`;
+              })
+              .join("");
+            objTable.innerHTML = content;
+          } else {
+            alert(JSON.parse(res).msg);
+            return;
+          }
+        }
+      };
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      alert("😥不要点太快，接口受不了(1s只能刷新一次)");
+      // 初始页为1
+      getRefresh("1");
+    });
+
+    var numBtn = document.querySelectorAll(".num button");
+    for (var i = 0; i < numBtn.length; i++) {
+      numBtn[i].onclick = function () {
+        page = this.innerHTML;
+        console.log(page);
+        // 排他
+        for (var j = 0; j < numBtn.length; j++) {
+          numBtn[j].classList.remove("active");
+        }
+        this.classList.add("active");
+        getRefresh(page);
+      };
+    }
+
+    var leftBtn = document.querySelectorAll(".menu button")[0];
+    var rightBtn = document.querySelectorAll(".menu button")[11];
+
+    leftBtn.onclick = function () {
+      if (page > 1) {
+        page--;
+        getRefresh(page);
+        for (var j = 0; j < numBtn.length; j++) {
+          numBtn[j].classList.remove("active");
+        }
+        numBtn[page - 1].classList.add("active");
+      } else {
+        page = 1;
+      }
+    };
+
+    rightBtn.onclick = function () {
+      if (page < 10) {
+        page++;
+        getRefresh(page);
+        for (var j = 0; j < numBtn.length; j++) {
+          numBtn[j].classList.remove("active");
+        }
+        numBtn[page - 1].classList.add("active");
+      } else {
+        page = 10;
+      }
+    };
+  </script>
+</html>

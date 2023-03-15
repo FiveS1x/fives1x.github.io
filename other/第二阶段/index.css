@@ -1,0 +1,178 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+body {
+  background: url(./images/ny_con_bg.jpg) no-repeat;
+}
+
+/* 大盒子 */
+
+.main {
+  width: 1200px;
+  margin: 50px auto;
+  border: 2px solid #E8E8E8;
+  padding: 35px 28px;
+  box-sizing: border-box;
+}
+
+/* 大盒子 */
+
+/* 选择选项卡 */
+
+.herolist-type {
+  border-radius: 5px;
+  background-color: #efefef;
+  color: #686869;
+  position: relative;
+}
+
+.type-left {
+  float: left;
+  width: 80px;
+  height: 106px;
+  text-align: center;
+  background-color: #2c88e2;
+  color: #fff;
+  border-radius: 5px 0 0 5px;
+}
+
+.type-left li {
+  height: 52px;
+  line-height: 52px;
+  font-size: 16px;
+}
+
+.type-ms {
+  display: flex;
+  width: 900px;
+  padding: 16px 0;
+  height: 20px;
+  line-height: 21px;
+}
+
+.type-ms li {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  min-width: 90px;
+  font-size: 14px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+/* 仿一个radio按钮 */
+.type-ms li .ms-radio {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 7px;
+  border: 1px solid #B3B3B3;
+  border-radius: 50px;
+  position: relative;
+}
+
+/* 按钮里面的点 */
+.ms-radio .i {
+  display: inline-block;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  background-color: none;
+  border-radius: 50px;
+}
+
+/* 选中时 */
+.type-ms li.current .ms-radio .i {
+  background-color: #358add;
+}
+
+/* 英雄搜索框 */
+.herosearch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  top: 50px;
+  right: 30px;
+  border: 1px solid #D2D2D2;
+  padding: 10px;
+  height: 22px;
+  width: 220px;
+}
+
+.herosearch input {
+
+  border: none;
+  width: 80%;
+  height: 22px;
+  line-height: 20px;
+  font-size: 12px;
+  color: #747475;
+  background: none;
+  outline: none;
+}
+
+.herosearch a {
+  display: inline-block;
+  padding-left: 10px;
+  width: 22px;
+  height: 22px;
+  border-left: 1px solid #D5D5D5;
+  background: url(./images/vl_search_icon.png) no-repeat 12px center;
+}
+
+/* 选择选项卡 */
+
+
+/* 全部英雄 */
+.herolist-content {
+  margin-top: 40px;
+}
+
+.herolist-content ul {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+}
+
+/* 单个英雄样式 */
+.herolist-content li {
+  width: 87px;
+  margin-bottom: 34px;
+  margin-right: 30px;
+}
+
+.herolist-content li:nth-child(10n) {
+  margin-right: 0;
+}
+
+.herolist-content li a {
+  display: block;
+  color: #363636;
+  text-align: center;
+}
+
+.herolist-content li a img {
+  width: 83px;
+  height: 83px;
+  border: 2px solid #258DF2;
+  border-radius: 10px 0 10px 0;
+}
+
+/* 全部英雄 */

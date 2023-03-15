@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .main {
+        width: 990px;
+        height: 540px;
+        /* background-color: skyblue; */
+        margin: 50px auto;
+        display: flex;
+        /* justify-content: center; */
+      }
+
+      .midden {
+        position: relative;
+        width: 450px;
+        height: 450px;
+        /* background-color: pink; */
+        background-image: url(./images/middle/01.jpg);
+        border: 1px solid #eeeeee;
+      }
+
+      .big {
+        width: 540px;
+        height: 540px;
+        /* background-color: orange; */
+        display: none;
+        border: 1px solid #eeeeee;
+        overflow: hidden;
+      }
+
+      .smallList {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 450px;
+        height: 90px;
+        /* background-color: red; */
+        position: relative;
+        overflow: hidden;
+      }
+
+      .small {
+        width: 54px;
+        height: 54px;
+        border: 3px solid transparent;
+      }
+
+      .small img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .big img {
+        width: 800px;
+        height: 800px;
+      }
+
+      .small.active {
+        border: 3px solid #e53e41;
+      }
+
+      .arr {
+        color: #999a9b;
+        font-size: 20px;
+        font-weight: 900;
+        height: 90px;
+        line-height: 90px;
+        background: white;
+        position: relative;
+        z-index: 1111;
+      }
+
+      .arr:hover {
+        cursor: pointer;
+      }
+
+      .mask {
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #fede4f;
+        opacity: 0.5;
+        visibility: hidden;
+        /* pointer-events: none; */
+      }
+
+      .mask:hover {
+        cursor: move;
+      }
+
+      .longList {
+        display: flex;
+        width: 750px;
+        height: 90px;
+        align-items: center;
+        justify-content: space-around;
+        /* background-color: orange; */
+        position: absolute;
+        top: 0;
+        left: 16px;
+        transition: all 1s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="left">
+        <div class="midden">
+          <div class="mask"></div>
+          <!-- <img src="./images/middle/01.jpg" alt="" /> -->
+        </div>
+        <div class="smallList">
+          <div class="arr">&nbsp;<&nbsp;</div>
+          <div class="longList">
+            <div class="small active">
+              <img src="./images/small/01.jpg" alt="" />
+            </div>
+            <div class="small">
+              <img src="./images/small/02.jpg" alt="" />
+            </div>
+            <div class="small">
+              <img src="./images/small/03.jpg" alt="" />
+            </div>
+            <div class="small">
+              <img src="./images/small/04.jpg" alt="" />
+            </div>
+            <div class="small">
+              <img src="./images/small/05.jpg" alt="" />
+            </div>
+            <div class="small">
+              <img src="./images/small/06.jpg" alt="" />
+            </div>
+            <div class="small">
+              <img src="./images/small/07.jpg" alt="" />
+            </div>
+            <div class="small">
+              <img src="./images/small/08.jpg" alt="" />
+            </div>
+            <div class="small">
+              <img src="./images/small/09.jpg" alt="" />
+            </div>
+          </div>
+          <div class="arr">&nbsp;>&nbsp;</div>
+        </div>
+      </div>
+      <div class="big"><img src="./images/big/01.jpg" alt="" /></div>
+    </div>
+
+    <script>
+      var midDiv = document.querySelector(".midden");
+      var bigDiv = document.querySelector(".big");
+      var smallDivs = document.querySelectorAll(".small");
+
+      // 小图活动
+      for (var i = 0; i < smallDivs.length; i++) {
+        smallDivs[i].dataset.imgIndex = i + 1;
+        smallDivs[i].onmouseover = function () {
+          for (var j = 0; j < smallDivs.length; j++) {
+            smallDivs[j].classList.remove("active");
+          }
+          this.classList.add("active");
+          midDiv.style.backgroundImage =
+            "url(./images/middle/0" + this.dataset.imgIndex + ".jpg)";
+          bigDiv.querySelector("img").src =
+            "./images/big/0" + this.dataset.imgIndex + ".jpg";
+        };
+      }
+
+      // 小图列表滚动
+      var arr = document.querySelectorAll(".arr");
+      var longList = document.querySelector(".longList");
+
+      // 左移
+      arr[0].onclick = function () {
+        longList.style.left = "16px";
+      };
+
+      // 右移
+      arr[1].onclick = function () {
+        longList.style.left = "-317px";
+      };
+
+      //大图查看
+      var mask = document.querySelector(".mask");
+
+      // 阴影盒子宽度
+      var maskWidth = mask.offsetWidth;
+      var maskHeight = mask.offsetHeight;
+      var midWidth = midDiv.offsetWidth;
+      var midHeight = midDiv.offsetHeight;
+      var nowX = 0;
+      var nowY = 0;
+
+      document.onmousemove = function (e) {
+        console.log();
+        console.log();
+      };
+
+      // 当鼠标进入中图时
+      midDiv.onmousemove = function (e) {
+        // 显示遮罩
+        mask.style.visibility = "visible";
+        bigDiv.style.display = "block";
+
+        // 不能用offsetX 和 offsetY
+        // https://blog.csdn.net/weixin_40594645/article/details/107285015
+
+        // 也不能用 nowX = e.clientX - midDiv.offsetLeft - maskWidth / 2;
+        // 因为要判断的是页面的 X 而不是客户端的 X
+        nowX = e.pageX - midDiv.offsetLeft - maskWidth / 2;
+        nowY = e.pageY - midDiv.offsetTop - maskHeight / 2;
+
+        if (nowX < 0) {
+          // 如果超出了midDiv的左边
+          nowX = 0;
+        } else if (e.pageX - midDiv.offsetLeft > midWidth - maskWidth / 2) {
+          // 如果超出了midDiv的右边
+          nowX = midWidth - maskWidth;
+          // console.log(nowX);
+        }
+
+        // nowY - 100 < 0 会有类吸附效果
+        if (nowY < 0) {
+          // 如果超出了midDiv的左边
+          nowY = 0;
+        } else if (e.pageY - midDiv.offsetTop > midHeight - maskHeight / 2) {
+          // 如果超出了midDiv的右边  这个判断也不能用offsetX
+          nowY = midHeight - maskHeight;
+        }
+        console.log("now:", nowX, nowY);
+
+        // 减去边框
+        nowX -= 2;
+        nowY -= 2;
+
+        mask.style.left = nowX + "px";
+        mask.style.top = nowY + "px";
+
+        // 用卷动设置大图片移动
+        // 让右边的大div移动
+        // 1.73 = 450/(800 - 540)
+        bigDiv.scrollLeft = nowX * 1.73;
+        bigDiv.scrollTop = nowY * 1.73;
+      };
+
+      midDiv.onmouseleave = function () {
+        mask.style.visibility = "hidden";
+        bigDiv.style.display = "none";
+      };
+    </script>
+  </body>
+</html>

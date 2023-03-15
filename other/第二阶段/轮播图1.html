@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .main {
+        display: flex;
+        justify-content: space-between;
+        margin: 50px auto;
+        width: 963px;
+        height: 560px;
+        box-shadow: 0 0 5px gray;
+        padding: 13px;
+        padding-right: 27px;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+
+      .bigImgList {
+        width: 741px;
+        height: 100%;
+      }
+
+      .bigImgList img {
+        width: 100%;
+        margin-bottom: 20px;
+        border-radius: 4px;
+      }
+
+      .right {
+        position: relative;
+      }
+
+      .right img {
+        display: block;
+        width: 147px;
+        height: 81px;
+        margin-bottom: 32px;
+        opacity: 0.5;
+      }
+
+      .right .choose {
+        width: 147px;
+        height: 81px;
+        border: 3px solid #af5000;
+        position: absolute;
+        left: -3px;
+        top: -3px;
+        /* -3 110 223 336 449 */
+        border-radius: 5px;
+      }
+
+      .sanjiao {
+        position: absolute;
+        transform: translateY(-50%);
+        top: 50%;
+        left: -16px;
+        width: 0;
+        height: 0;
+        border: 8px solid transparent;
+        border-right-color: #af5000;
+        border-right-width: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="left">
+        <div class="bigImgList">
+          <img src="./images/t1.png" alt="" />
+          <img src="./images/t2.png" alt="" />
+          <img src="./images/t3.png" alt="" />
+          <img src="./images/t4.png" alt="" />
+          <img src="./images/t5.png" alt="" />
+        </div>
+      </div>
+      <div class="right">
+        <img src="./images/t1.png" alt="" />
+        <img src="./images/t2.png" alt="" />
+        <img src="./images/t3.png" alt="" />
+        <img src="./images/t4.png" alt="" />
+        <img src="./images/t5.png" alt="" />
+        <div class="choose"><div class="sanjiao"></div></div>
+      </div>
+    </div>
+
+    <script>
+      // 1. 封装一个函数,实现以下功能(20分)
+      // console.log( fn(9) );      // 输出 9 => 9
+      // console.log( fn(23) );     // 输出 23 => 2 + 3 => 5
+      // console.log( fn(2349) );   // 输出 2349 => 2 + 3 + 4 + 9 => 18 => 1 + 8 => 9
+      // console.log( fn(439331) ); // 输出 439331 => 4 + 3 + 9 + 3 + 3 + 1 => 23 => 2 + 3 => 5
+
+      // 思路 判断当前字符串的长度 如果大于1 把它拆开 split 转成数字相加 再判断长度是不是大于1 如果还大 再拆开相加
+      // 递归
+      function fn(num) {
+        num = String(num);
+        if (num.length > 1) {
+          // 长度大于1
+          var arr = num.split("");
+          var sum = 0;
+          var str = "";
+          // 拆成数组
+          for (var i in arr) {
+            sum += Number(arr[i]);
+            // 不是最后一个
+            if (i != arr.length - 1) {
+              str += arr[i] + " + ";
+            } else {
+              str += arr[i];
+            }
+          }
+
+          if (String(sum).length > 1) {
+            // 如果结果的长度还是大于1 就返回fn(sum) 让它再进去
+            return num + " => " + str + " => " + fn(sum);
+          }
+
+          return num + " => " + str + " => " + sum;
+        } else {
+          return num + " => " + num;
+        }
+      }
+
+      console.log("第一题");
+      console.log(fn(9));
+      console.log(fn(23));
+      console.log(fn(2349));
+      console.log(fn(439331));
+      console.log("");
+      console.log("");
+      console.log("");
+      console.log("");
+
+      // 2. 封装一个函数,找出数组arr中重复出现过的元素,并进行升序排序
+      // 比如 foo( [1,2,4,4,3,3,1,5,3] ) 输出结果 [1, 3 , 4]
+      // 比如 foo( [10,20,30] ) 输出结果 []
+      // 比如 foo( [30,20,30,20,10,20,50,75,10] ) 输出结果 [10, 20, 30]
+
+      // 思路 看看它除了出现在它本身的位置还出现在什么位置 如果它第一次出现的位置和最后一次出现的位置相同 那么它就只有一个
+      function foo(arr) {
+        // 定义一个临时的数组
+        var tempArr = [];
+
+        for (var item in arr) {
+          // 如果他第一次出现的下标和他现在的下标不一样 同时 tempArr里面没有它 就把它存入 tempArr
+          if (arr.indexOf(arr[item]) != item) {
+            if (!tempArr.includes(arr[item])) {
+              tempArr.push(arr[item]);
+            }
+          }
+        }
+
+        return tempArr.sort();
+      }
+
+      console.log("第二题");
+      console.log(foo([1, 2, 4, 4, 3, 3, 1, 5, 3]));
+      console.log(foo([10, 20, 30]));
+      console.log(foo([30, 20, 30, 20, 10, 20, 50, 75, 10]));
+      console.log("");
+      console.log("");
+      console.log("");
+      console.log("");
+
+      // 3. 编写js一个函数,提取url字符串中的参数,并以key-value的形式返回到一个对象结构中
+      // 比如:
+      //     getUrlParam( "https://item.taobao.com/item.html?a=1&b=2&c=&d=xxx&e" )
+
+      // 返回:
+      //     {
+      //         a : "1",
+      //         b : "2",
+      //         c : "",
+      //         d : "xxx",
+      //         e : undefined
+      //     }
+
+      // 思路 先把?和它后面的字符串都提取出来
+
+      function getUrlParam(url) {
+        var reg1 = /(\w\=.+)+/;
+        var str = "";
+        var obj = {};
+        // 提取?及其后面的字符串
+        str = reg1.exec(url)[0];
+        var temp = str.split("&");
+        var reg2 = /(\w)(\=(.*))*/;
+
+        // 遍历这个数组 提取其中的1 3
+        temp.forEach(function (item) {
+          reg2.exec(item);
+          // 如果第3个参数是空的 那么代表没有等号 所以设置为undefined
+          if (RegExp.$2 === "") {
+            obj[RegExp.$1] = undefined;
+            console.log();
+          } else {
+            obj[RegExp.$1] = RegExp.$3;
+          }
+        });
+        return obj;
+      }
+
+      console.log("第三题");
+      console.log(
+        getUrlParam("https://item.taobao.com/item.html?a=1&b=2&c=&d=xxx&e")
+      );
+      console.log("");
+      console.log("");
+      console.log("");
+      console.log("");
+
+      // 4. 实现html+css+javascript效果
+      // 要求: 实现tabs切换效果。右侧图片红色三角形与选框必须写，选中图片高亮，其他选项模糊效果。右侧选框有移动效果（下面有效果图）。左侧切换即可
+
+      // 缓动函数 只用控制一个参数
+      function animate(dom, style, value) {
+        clearInterval(dom.timer);
+        // 这个timer一定要赋值给控制元素的 如果不赋的话 它会认为是新定义的一个timer
+        dom.timer = setInterval(function () {
+          var flag = true;
+          var target = value;
+          // 获取现在的值
+          var curVal = parseFloat(getComputedStyle(dom)[style]);
+          // 判断是否达到目标值
+          if (curVal != target) {
+            flag = false;
+          }
+          // 速度 要判断数值是大于0还是小于0 大于向上取整 小于向下取整
+          var speed = (target - curVal) / 10;
+          speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+          dom.style[style] = curVal + speed + "px";
+        }, 15);
+      }
+
+      // 缓动函数
+
+      var rightChooseBox = document.querySelector(".choose");
+      var rightImg = document.querySelectorAll(".right img");
+      var leftBigImg = document.querySelector(".bigImgList");
+      rightImg[0].style.opacity = 1;
+      for (var i = 0; i < rightImg.length; i++) {
+        rightImg[i].dataset.index = i;
+        rightImg[i].onclick = function () {
+          // 移动距离
+          var moveVal = -3 + 113 * this.dataset.index;
+          var bigMoveVal = -557 * this.dataset.index;
+
+
+          // 运动指定的元素
+          animate(rightChooseBox, "top", moveVal);
+          animate(leftBigImg, "marginTop", bigMoveVal);
+
+          
+          // 修改透明度
+          for (var j = 0; j < rightImg.length; j++) {
+            rightImg[j].style.opacity = 0.5;
+          }
+          this.style.opacity = 1;
+        };
+      }
+    </script>
+  </body>
+</html>

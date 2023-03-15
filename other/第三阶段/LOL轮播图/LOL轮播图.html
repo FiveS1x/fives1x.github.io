@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .main {
+        width: 820px;
+        height: 380px;
+        margin: 50px auto;
+        overflow: hidden;
+      }
+
+      .pic {
+        display: flex;
+        margin-left: -820px;
+      }
+
+      ul {
+        display: flex;
+        height: 40px;
+      }
+
+      ul li {
+        flex: 1;
+        height: 100%;
+        line-height: 40px;
+        text-align: center;
+        background-color: #e3e2e2;
+        cursor: pointer;
+        font-size: 14px;
+        box-sizing: border-box;
+        border-bottom: 2px solid transparent;
+      }
+
+      li.active {
+        background-color: #f7f6f6;
+        border-bottom: 2px solid #cea861;
+        color: #cea861;
+      }
+    </style>
+    <script src="./js/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="pic">
+        <img src="./images/5.jpg" alt="" />
+        <img src="./images/1.jpg" alt="" />
+        <img src="./images/2.jpg" alt="" />
+        <img src="./images/3.jpg" alt="" />
+        <img src="./images/4.jpg" alt="" />
+        <img src="./images/5.jpg" alt="" />
+        <img src="./images/1.jpg" alt="" />
+      </div>
+      <ul>
+        <li class="active">FPX冠军皮肤</li>
+        <li>魔女 婕拉 至臻</li>
+        <li>2020LPL春季赛季后赛</li>
+        <li>挑战主播赢现金</li>
+        <li>每周限时优惠</li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    // 定义一个上一张图片的变量 初始值为4
+    var beforePic = 4;
+    $("ul li").click(function () {
+      $("li").removeClass("active");
+      $(this).addClass("active");
+
+      // 当点击第五个li时
+      if ($(this).index() == 4) {
+        // 如果上一张是第一张
+        if (beforePic == 0) {
+          // 先正常移动
+          $(".pic").animate({ marginLeft: 0 }, function () {
+            // 再直接跳到第五张
+            $(".pic").css({ marginLeft: -4100 });
+          });
+        } else {
+          $(".pic").animate({ marginLeft: ($(this).index() + 1) * -820 }, 400);
+        }
+        beforePic = $(this).index();
+      } else if ($(this).index() == 0) {
+        // 当点击第一个li时
+        // 如果上一张是第五张
+        if (beforePic == 4) {
+          $(".pic").animate({ marginLeft: -4920 }, function () {
+            $(".pic").css({ marginLeft: -820 });
+          });
+          // 再直接跳到第一张
+        } else {
+          $(".pic").animate({ marginLeft: ($(this).index() + 1) * -820 }, 400);
+        }
+        beforePic = $(this).index();
+      } else {
+        $(".pic").animate({ marginLeft: ($(this).index() + 1) * -820 }, 400);
+        beforePic = $(this).index();
+      }
+    });
+  </script>
+</html>

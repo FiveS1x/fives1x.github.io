@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 加这个不返回403 -->
+    <meta name="referrer" content="never" />
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./js/AllLabel.js"></script>
+    <script src="./js/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="nav">
+        <div class="menu"></div>
+        <div class="menu"></div>
+        <div class="menu"></div>
+        <div class="menu"></div>
+        <div class="menu"></div>
+      </div>
+      <div class="content">
+        <img src="./images/sample.gif" alt="" class="loading" />
+      </div>
+    </div>
+  </body>
+  <script>
+    // 先设置初始值
+    var query = {
+      style_id: -1,
+      area_id: -1,
+      is_free: -1,
+      is_finish: -1,
+      order: 0,
+      page_num: 1,
+      page_size: 30,
+    };
+
+    function getList(type, index) {
+      if (type != null) {
+        query[type] = index;
+      }
+
+      $.ajax({
+        type: "GET",
+        // 异步
+        async: true,
+        url: "https://apis.netstart.cn/mbcomic/ClassPage",
+        data: query,
+        beforeSend: function () {
+          $(".loading").show();
+        },
+        success: function (res) {
+          $(".loading").hide();
+          var data = res.data;
+          if (data.length !== 0) {
+            data.map(function (item) {
+              // console.log(item);
+              if (item.is_finish == 1) {
+                $(".content")
+                  .append(`<a href="https://manga.bilibili.com/detail/mc${item.season_id}"><div class="box"><img
+            src="${item.vertical_cover}"
+          /><div class="name">${item.title}</div><div class="detail">[完结] 共 ${item.last_short_title} 话</div></div></a>`);
+              } else {
+                $(".content")
+                  .append(`<a href="https://manga.bilibili.com/detail/mc${item.season_id}"><div class="box"><img
+            src="${item.vertical_cover}"
+          /><div class="name">${item.title}</div><div class="detail">更新至 ${item.last_short_title} 话</div></div></a>`);
+              }
+            });
+          } else {
+            // 如果找不到
+            $(".content").append(
+              '<img src="./images/no-find.png" alt="" class="nofind"/>'
+            );
+          }
+        },
+      });
+    }
+
+    // 加载页面时渲染
+    $(window).on("DOMContentLoaded", function () {
+      // console.log(AllLabel.areas);
+      var str = "题材";
+      AllLabel.styles.map(function (item, index) {
+        if (index == "0") {
+          str += `<div class="box active" data-index="${item.id}" data-type="style_id">${item.name}</div>`;
+        } else {
+          str += `<div class="box" data-index="${item.id}" data-type="style_id">${item.name}</div>`;
+        }
+      });
+      $(".menu:nth-child(1)").html(str);
+      str = "地区";
+      AllLabel.areas.map(function (item, index) {
+        if (index == "0") {
+          str += `<div class="box active" data-index="${item.id}" data-type="area_id">${item.name}</div>`;
+        } else {
+          str += `<div class="box" data-index="${item.id}" data-type="area_id">${item.name}</div>`;
+        }
+      });
+      $(".menu:nth-child(2)").html(str);
+      str = "进度";
+      AllLabel.status.map(function (item, index) {
+        if (index == "0") {
+          str += `<div class="box active" data-index="${item.id}" data-type="is_finish">${item.name}</div>`;
+        } else {
+          str += `<div class="box" data-index="${item.id}" data-type="is_finish">${item.name}</div>`;
+        }
+      });
+      $(".menu:nth-child(3)").html(str);
+      str = "收费";
+      AllLabel.prices.map(function (item, index) {
+        if (index == "0") {
+          str += `<div class="box active" data-index="${item.id}" data-type="is_free">${item.name}</div>`;
+        } else {
+          str += `<div class="box" data-index="${item.id}" data-type="is_free">${item.name}</div>`;
+        }
+      });
+      $(".menu:nth-child(4)").html(str);
+      str = "排序";
+      AllLabel.orders.map(function (item, index) {
+        if (index == "0") {
+          str += `<div class="box active" data-index="${item.id}" data-type="order">${item.name}</div>`;
+        } else {
+          str += `<div class="box" data-index="${item.id}" data-type="order">${item.name}</div>`;
+        }
+      });
+      $(".menu:nth-child(5)").html(str);
+
+      // 用ajax获取列表
+      getList();
+    });
+
+    // 给所有的box加上点击事件 用menu代理
+    $(".menu").on("click", $(".box"), function (e) {
+      $(e.target).siblings().removeClass("active");
+      $(e.target).addClass("active");
+      $(e.target).data("");
+      // 每次点击都要加上刷新列表
+      $(".content").children().remove();
+      var style = $(e.target).data("type");
+      var index = $(e.target).data("index");
+      getList(style, index);
+    });
+  </script>
+</html>

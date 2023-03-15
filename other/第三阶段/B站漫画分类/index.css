@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+.main {
+  width: 1305px;
+  margin: 20px auto;
+}
+.menu {
+  margin-bottom: 20px;
+  color: gray;
+}
+.menu .box {
+  padding: 5px 10px;
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  margin-left: 13px;
+  border-radius: 5px;
+  color: black;
+  cursor: pointer;
+}
+.menu .box.active {
+  color: white;
+  background-color: #32aaff;
+}
+.content {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.content .nofind {
+  display: block;
+  width: 300px;
+  margin: 0 auto;
+}
+.content .loading {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+}
+.content a {
+  text-decoration: none;
+}
+.content a .box {
+  margin-bottom: 30px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.content a .box img {
+  display: block;
+  width: 200px;
+}
+.content a .box .name {
+  color: black;
+  width: 200px;
+  margin-top: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.content a .box .detail {
+  color: gray;
+  font-size: 14px;
+}
+/*# sourceMappingURL=./index.css.map */

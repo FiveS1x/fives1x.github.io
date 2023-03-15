@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .main {
+        width: 1500px;
+        height: 515px;
+        border: 6px solid skyblue;
+        border-radius: 10px;
+        margin: 50px auto;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 40px;
+        margin-top: 50px;
+      }
+
+      .search {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .search input {
+        padding: 10px;
+        width: 505px;
+        height: 42px;
+        outline: none;
+        border: 2px solid skyblue;
+        box-sizing: border-box;
+        font-size: 18px;
+      }
+
+      .search button {
+        width: 103px;
+        height: 42px;
+        background-color: skyblue;
+        border: 2px solid skyblue;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        outline: none;
+      }
+
+      .popCity {
+        margin: 0 auto;
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        width: 600px;
+      }
+
+      .popCity b {
+        font-weight: normal;
+      }
+
+      .popCity .cityList {
+        display: flex;
+        width: 430px;
+        justify-content: space-between;
+      }
+
+      .popCity .cityList div {
+        cursor: pointer;
+        color: gray;
+      }
+
+      .popCity div.change {
+        color: black;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+
+      .popCity div.change img {
+        height: 16px;
+        display: block;
+      }
+
+      .allWeather {
+        margin-top: 60px;
+        display: flex;
+      }
+      .weather {
+        flex: 1;
+        text-align: center;
+        border-right: 1px solid #f0f0f0;
+      }
+
+      .weather:hover {
+        background-color: #f3f9fe;
+        cursor: pointer;
+      }
+
+      .weather:last-child {
+        border: 0;
+      }
+
+      .weather img {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 8px;
+        height: 50px;
+      }
+
+      .weather div {
+        font-size: 14px;
+        margin-bottom: 3px;
+      }
+
+      .weather div:nth-child(-n + 3) {
+        color: orange;
+      }
+
+      .weather div:nth-child(4) {
+        color: #abaaaa;
+      }
+
+      .error {
+        margin-top: 28px;
+        text-align: center;
+        flex: 1;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <h1>天气预报</h1>
+      <div class="search"><input type="text" /><button>搜索</button></div>
+      <div class="popCity">
+        <b>热门城市:</b>
+        <div class="cityList">
+          <!-- <div>广州</div>
+          <div>广州</div>
+          <div>广州</div>
+          <div>广州</div>
+          <div>广州</div>
+          <div>广州</div>
+          <div>广州</div> -->
+        </div>
+        <div class="change">
+          <span>换一换</span><img src="./images/refresh-icon.png" alt="" />
+        </div>
+      </div>
+
+      <div class="allWeather">
+        <!-- <div class="weather">
+          <img src="./images/leizhenyu.png" alt="" />
+          <div>雷阵雨</div>
+          <div>最低温 25℃ - 最高温 33℃</div>
+          <div>2021-06-09星期三</div>
+          <div>北风</div>
+          <div>1-2级</div>
+        </div>
+        <div class="weather">
+          <img src="./images/leizhenyu.png" alt="" />
+          <div>雷阵雨</div>
+          <div>最低温 25℃ - 最高温 33℃</div>
+          <div>2021-06-09星期三</div>
+          <div>北风</div>
+          <div>1-2级</div>
+        </div>
+        <div class="weather">
+          <img src="./images/leizhenyu.png" alt="" />
+          <div>雷阵雨</div>
+          <div>最低温 25℃ - 最高温 33℃</div>
+          <div>2021-06-09星期三</div>
+          <div>北风</div>
+          <div>1-2级</div>
+        </div>
+        <div class="weather">
+          <img src="./images/leizhenyu.png" alt="" />
+          <div>雷阵雨</div>
+          <div>最低温 25℃ - 最高温 33℃</div>
+          <div>2021-06-09星期三</div>
+          <div>北风</div>
+          <div>1-2级</div>
+        </div>
+        <div class="weather">
+          <img src="./images/leizhenyu.png" alt="" />
+          <div>雷阵雨</div>
+          <div>最低温 25℃ - 最高温 33℃</div>
+          <div>2021-06-09星期三</div>
+          <div>北风</div>
+          <div>1-2级</div>
+        </div>
+        <div class="weather">
+          <img src="./images/leizhenyu.png" alt="" />
+          <div>雷阵雨</div>
+          <div>最低温 25℃ - 最高温 33℃</div>
+          <div>2021-06-09星期三</div>
+          <div>北风</div>
+          <div>1-2级</div>
+        </div>
+        <div class="weather">
+          <img src="./images/leizhenyu.png" alt="" />
+          <div>雷阵雨</div>
+          <div>最低温 25℃ - 最高温 33℃</div>
+          <div>2021-06-09星期三</div>
+          <div>北风</div>
+          <div>1-2级</div>
+        </div> -->
+      </div>
+    </div>
+  </body>
+  <script src="./js/jquery.min.js"></script>
+  <script>
+    // 热门城市总列表
+    var arrCityName = [
+      "北京",
+      "上海",
+      "广州",
+      "深圳",
+      "苏州",
+      "大连",
+      "重庆",
+      "杭州",
+      "无锡",
+      "天津",
+      "佛山",
+      "宁波",
+      "南京",
+      "成都",
+      "东莞",
+      "武汉",
+      "青岛",
+      "沈阳",
+      "烟台",
+      "唐山",
+      "济南",
+      "哈尔滨",
+      "石家庄",
+      "郑州",
+      "泉州",
+      "温州",
+      "长沙",
+      "南通",
+      "长春",
+      "潍坊",
+      "绍兴",
+      "福州",
+      "淄博",
+      "大庆",
+      "常州",
+      "台州",
+      "济宁",
+      "东营",
+      "西安",
+      "徐州",
+      "临沂",
+      "威海",
+      "嘉兴",
+      "邯郸",
+      "洛阳",
+      "沧州",
+      "金华",
+      "昆明",
+      "南阳",
+      "保定",
+    ];
+
+    // 创建ajax对象
+    var xhr = new XMLHttpRequest();
+
+    function hotCityFn() {
+      var hotCity = [];
+      var tempArr = [];
+      // 用随机数抽七个此时放进新数组 当长度为7时停止
+
+      while (hotCity.length != 7) {
+        // 随机数
+        var randomX = Math.floor(Math.random() * arrCityName.length);
+        if (!hotCity.includes(arrCityName[randomX])) {
+          hotCity.push(arrCityName[randomX]);
+          tempArr.push("<div>" + arrCityName[randomX] + "</div>");
+        }
+      }
+      var cityList = hotCity.join("");
+      $(".cityList").html(tempArr);
+      $(".cityList")
+        .children()
+        .click(function () {
+          $("input").val($(this).text());
+          getWeather();
+        });
+      $("input").val(hotCity[0]);
+    }
+
+    function getWeather() {
+      if ($("input").val() == "") {
+        alert("能不能输入城市，没城市我怎么找啊😥😥😥😥😥");
+        return;
+      }
+      // 使用ajax
+      xhr.open(
+        "GET",
+        "https://apis.tianapi.com/tianqi/index?key=63d033e7824e2dd2a9b657540fcc6163&type=7&city=" +
+          $("input").val()
+      );
+      xhr.send();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          var res = JSON.parse(xhr.responseText);
+          if (res.code == 200) {
+            res = res.result;
+            var weatherList = res.list;
+
+            // 清空allweather的孩子
+            $(".allWeather").children().remove();
+            for (var i in weatherList) {
+              var newDiv = $("<div></div>");
+              var str = "";
+              newDiv.addClass("weather");
+              str +=
+                '<img src="./images/' +
+                weatherList[i].weatherimg +
+                '" alt="" /><div>' +
+                weatherList[i].weather +
+                "</div><div>最低温 " +
+                weatherList[i].lowest +
+                " - 最高温 " +
+                weatherList[i].highest +
+                "</div><div>" +
+                weatherList[i].date +
+                " " +
+                weatherList[i].week +
+                "</div><div>" +
+                weatherList[i].wind +
+                "</div><div>" +
+                weatherList[i].windsc +
+                "</div>";
+              newDiv.html(str);
+              // console.log(newDiv.html());
+              $(".allWeather").append(newDiv);
+            }
+          } else {
+            // 如果不是200
+            $(".allWeather").children().remove();
+            var newDiv = $("<div></div>");
+            newDiv.addClass("error");
+            newDiv.html("😥哎呀,查询天气发生了错误,错误原因是: " + res.msg);
+            $(".allWeather").append(newDiv);
+          }
+        }
+      };
+    }
+
+    // 当网页加载时执行一次刷新热门城市
+    $(document).on("DOMContentLoaded", function () {
+      hotCityFn();
+      getWeather();
+    });
+
+    // 当点击换一换时就刷新
+    $(".change").click(function () {
+      hotCityFn();
+      getWeather();
+    });
+
+    $("button").click(function () {
+      getWeather();
+    });
+
+    // 回车
+    $("input").on("keyup", function (e) {
+      if (e.keyCode == 13) {
+        getWeather();
+      }
+    });
+  </script>
+</html>

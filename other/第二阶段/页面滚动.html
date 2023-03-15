@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      div {
+        text-align: center;
+        vertical-align: middle;
+        font-size: 30px;
+      }
+
+      .top,
+      .bottom {
+        width: 100%;
+        height: 80px;
+        background-color: #7f7f7e;
+        line-height: 80px;
+      }
+
+      .sameBox {
+        width: 1000px;
+        height: 710px;
+        margin: 0 auto;
+      }
+
+      .nav {
+        font-size: 12px;
+        position: fixed;
+        top: 100px;
+        right: 50px;
+      }
+
+      li {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid #e4e4e3;
+        cursor: pointer;
+        background-color: #fff;
+      }
+
+      .active {
+        background-color: #ff1800;
+        color: white;
+      }
+
+      li:last-child {
+        background-color: #ff1800;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top">页面头部</div>
+    <div class="sameBox">直播</div>
+    <div class="sameBox">动画</div>
+    <div class="sameBox">番剧</div>
+    <div class="sameBox">音乐</div>
+    <div class="sameBox">舞蹈</div>
+    <div class="sameBox">游戏</div>
+    <div class="sameBox">科技</div>
+    <div class="sameBox">生活</div>
+    <div class="sameBox">鬼畜</div>
+    <div class="sameBox">时尚</div>
+    <div class="sameBox">广告</div>
+    <div class="bottom">页面底部</div>
+    <div class="nav">
+      <ul>
+        <li>1F</li>
+        <li>2F</li>
+        <li>3F</li>
+        <li>4F</li>
+        <li>5F</li>
+        <li>6F</li>
+        <li>7F</li>
+        <li>8F</li>
+        <li>9F</li>
+        <li>10F</li>
+        <li>11F</li>
+        <li>Top</li>
+      </ul>
+    </div>
+    <script>
+      // 给内容设置样式
+      var sameBoxs = document.querySelectorAll(".sameBox");
+      // 把浏览器的高赋给div
+      var sameBoxHeight = parseFloat(
+        window.getComputedStyle(sameBoxs[0])["height"]
+      );
+      console.log(sameBoxHeight);
+      // console.log(sameBoxHeight);
+
+      for (var i = 0; i < sameBoxs.length; i++) {
+        // sameBoxs[i].style.height = sameBoxHeight + "px";
+        // // 设置行高
+        sameBoxs[i].style.lineHeight = sameBoxHeight + "px";
+        // 设置背景颜色
+        sameBoxs[i].style.backgroundColor =
+          "#" + Math.random().toString(16).substr(2, 6);
+      }
+
+      // 导航栏设置
+      var liList = document.querySelectorAll("li");
+
+      // 封装一个删除所有active的函数
+      function removeActive() {
+        for (var j = 0; j < liList.length - 1; j++) {
+          liList[j].classList.remove("active");
+          liList[j].innerText = j + 1 + "F";
+        }
+      }
+
+      // 除了top都设置
+      for (var i = 0; i < liList.length; i++) {
+        liList[i].dataset.index = i;
+        liList[i].onclick = function () {
+          var nowIndex = this.dataset.index;
+          // 先跳
+          // 1 跳到80
+          // 2 跳到80+第一个的高度
+          // 3 跳到80+第一个的高度*2
+
+          // 不能滑动 只要滑动就会滑动网页 样式会有问题
+          // scroll({
+          //   top: 80 + sameBoxHeight * this.dataset.index,
+          // });
+          window.scroll(0, 80 + sameBoxHeight * nowIndex);
+        };
+      }
+
+      // 给top设置返回顶部
+      liList[liList.length - 1].onclick = function () {
+        scroll({
+          top: 0,
+          behavior: "smooth",
+        });
+        // removeActive();
+      };
+
+      // 1 80
+      // 2 80 + 第一个的高度
+      // 3 80 + 第一个的高度 + 第二个的高度 = 80 + 第一个的高度*2
+
+      document.onscroll = function () {
+        // 被卷去 看不见的部分
+        var cantSee = document.documentElement.scrollTop;
+        // console.log(cantSee);
+
+        if (cantSee >= 79) {
+          // cantSee - 80 => 距离第一个div的顶的距离
+          // (cantSee - 80) / sameBoxHeight => 现在是第几个div
+          removeActive();
+          // 不能使用 parseInt 要用ceil 向上取整
+          var nowDiv = Math.ceil((cantSee - 80) / sameBoxHeight);
+          console.log(nowDiv);
+          // 给对应的li加active
+          liList[nowDiv].classList.add("active");
+          liList[nowDiv].innerText = sameBoxs[nowDiv].innerText;
+        } else {
+          // 小于80 全部删除
+          removeActive();
+        }
+      };
+    </script>
+  </body>
+</html>

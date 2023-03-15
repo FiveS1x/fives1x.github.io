@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="./css/iconfont.css" />
+    <link rel="stylesheet" href="./css/musicPlayer1.css" />
+  </head>
+  <body>
+    <div class="musicPlayer">
+      <div class="top">
+        <!-- 图片 -->
+        <div class="pic">
+          <img class="before" src="./imgs/0.jpg" alt="" />
+          <img src="./imgs/0.jpg" alt="" />
+        </div>
+        <!-- 控制器 -->
+        <div class="controller">
+          <div class="circle">
+            <div class="iconfont icon-dianzan-shixin"></div>
+          </div>
+          <div class="circle"><div class="iconfont icon-zhuanfa"></div></div>
+          <div class="circle"><div class="iconfont icon-shangyiji"></div></div>
+          <div class="circle"><div class="iconfont icon-xiayiji"></div></div>
+          <div class="iconfont icon-bofang"></div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="name">RISE</div>
+        <div class="singer">The Glitch Mob / Mako / The Word Alive</div>
+        <div class="passTime">&nbsp;</div>
+        <div class="rate"><div class="go"></div></div>
+        <div class="played">00:00</div>
+      </div>
+    </div>
+
+    <audio src="./music/RISE.ogg"></audio>
+  </body>
+  <script>
+    var musicList = [
+      {
+        name: "RISE",
+        singer: "The Glitch Mob / Mako / The Word Alive",
+        type: "ogg",
+        like: true,
+      },
+      { name: "Lie", singer: "Sasha Alex Sloan", type: "ogg", like: true },
+      {
+        name: "Drum Go Dum",
+        singer: "K_DA / Aluna / Wolftyla / Bekuh Boom / 英雄联盟",
+        type: "ogg",
+        like: false,
+      },
+      { name: "Die For You", singer: "Grabbitz", type: "ogg", like: false },
+      {
+        name: "The In Between",
+        singer: "Elephante / Anjulie ",
+        type: "mp3",
+        like: false,
+      },
+      { name: "On My Own", singer: "Blitz Kids", type: "mp3", like: false },
+      { name: "威武", singer: "杨和苏KeyNG", type: "ogg", like: false },
+    ];
+
+    var playState = false;
+    var playBtn = document.querySelector(".icon-bofang");
+    var music = document.querySelector("audio");
+    var totalTimeDiv = document.querySelector(".passTime");
+    var imgDiv = document.querySelector(".pic img");
+
+    // 这种写法和封装函数的区别？
+
+    var timeChange = function (time) {
+      var mins = parseInt(time / 60);
+      var seconds = parseInt(time % 60);
+      mins < 10 ? (mins = "0" + mins) : mins;
+      seconds < 10 ? (seconds = "0" + seconds) : seconds;
+      // 返回字符串
+      return mins + ":" + seconds;
+    };
+
+    var playStateChange = function (State) {
+      if (State) {
+        // 如果当前状态是播放 改为暂停
+        playBtn.classList.remove("icon-zanting1");
+        playBtn.classList.add("icon-bofang");
+        // imgDiv.style.webkitAnimationPlayState = "paused";
+        music.pause();
+        return false;
+      } else {
+        // 如果当前状态是暂停 改为播放
+        return play();
+      }
+    };
+
+    var play = function (State) {
+      playBtn.classList.remove("icon-bofang");
+      playBtn.classList.add("icon-zanting1");
+      music.play();
+      // 旋转
+      // imgDiv.style.animation = "xuanzhuan 20s infinite linear";
+      playState = true;
+      return playState;
+    };
+
+    // 点击播放
+    playBtn.onclick = function () {
+      // 改变图标
+      playState = playStateChange(playState);
+      // 获取当前歌曲总时长
+      totalTimeDiv.innerHTML = timeChange(music.duration);
+    };
+
+    var rate = document.querySelector(".go");
+    var totalRate = document.querySelector(".rate");
+    var played = document.querySelector(".played");
+
+    // 当播放时间更新时
+    music.ontimeupdate = function () {
+      var goLong = (this.currentTime / this.duration).toFixed(2);
+      rate.style.width = goLong * 100 + "%";
+
+      // 获取当前播放过的时间
+      played.innerHTML = timeChange(music.currentTime);
+      if (this.currentTime == this.duration) {
+        nextSong();
+      }
+    };
+
+    // 点击进度条
+    totalRate.onclick = function (e) {
+      // 获取总时长
+      totalTimeDiv.innerHTML = timeChange(music.duration);
+      var allLong = parseInt(window.getComputedStyle(this).width);
+      var goLong = (e.offsetX / allLong).toFixed(2);
+      rate.style.width = goLong * 100 + "%";
+      music.currentTime = music.duration * goLong;
+      if (!playState) {
+        playState = playStateChange(playState);
+      }
+    };
+
+    var nowMusic = 0; //初始音乐序号为0
+    var nextMusic = document.querySelector(".icon-xiayiji");
+    var lastMusic = document.querySelector(".icon-shangyiji");
+    var bigImgBox = document.querySelector(".pic");
+    var changeInfo = function (index) {
+      // 换名字
+      var title = document.querySelector(".name");
+      title.innerHTML = musicList[index].name;
+
+      // 换作者
+      var singer = document.querySelector(".singer");
+      singer.innerHTML = musicList[index].singer;
+      // 换源
+      music.src =
+        "./music/" + musicList[index].name + "." + musicList[index].type;
+    };
+
+    var likeBtn = document.querySelector(".icon-dianzan-shixin");
+    var likeOrNot = function () {
+      // 获取是否为喜爱
+      likeBtn.classList.remove("red");
+      if (musicList[nowMusic].like == true) {
+        likeBtn.classList.add("red");
+      }
+    };
+    likeOrNot();
+
+    likeBtn.onclick = function () {
+      musicList[nowMusic].like = !musicList[nowMusic].like;
+      likeOrNot();
+    };
+
+    // 定义一个动画是否完成 为了让封面和歌曲不错位
+    var animationFinish = true;
+
+    var nextSong = function () {
+      if (animationFinish) {
+        if (nowMusic == musicList.length - 1) {
+          nowMusic = 0;
+        } else {
+          nowMusic++;
+        }
+        changeInfo(nowMusic);
+        likeOrNot();
+        // 切换歌曲 下一首
+        // 在pic后添加一个一样的盒子 缩放 0.8-1 透明度从0-1 图片为下一首歌的图
+        // pic放大1-1.2 透明度1-0 然后删除
+        var newDiv = document.createElement("div");
+        newDiv.classList.add("pic");
+        newDiv.innerHTML =
+          '<img class="before" src="./imgs/' +
+          nowMusic +
+          '.jpg" /><img src="./imgs/' +
+          nowMusic +
+          '.jpg" />';
+        // 把这个新盒子加在旧盒子后
+        bigImgBox.insertAdjacentElement("afterend", newDiv);
+        animationFinish = false;
+        // 让新盒子从小到大再显示
+        newDiv.style.animation = "big .3s linear";
+        // 让旧盒子从小到大再消失
+        bigImgBox.style.animation = "bigger .3s linear";
+        play();
+        // 延迟一秒让动画完成
+        setTimeout(function () {
+          // 移除旧pic盒子
+          bigImgBox.remove();
+          // 重新定义pic盒子
+          bigImgBox = document.querySelector(".pic");
+          // 获取总时长 要延迟一下 一开始的时间是错的
+          totalTimeDiv.innerHTML = timeChange(music.duration);
+          animationFinish = true;
+        }, 300);
+      }
+    };
+
+    // 当点击下一首时
+    nextMusic.onclick = nextSong;
+
+    lastMusic.onclick = function () {
+      if (animationFinish) {
+        if (nowMusic == 0) {
+          nowMusic = musicList.length - 1;
+        } else {
+          nowMusic--;
+        }
+        changeInfo(nowMusic);
+        likeOrNot();
+        // 切换歌曲 上一首
+        // 在pic后添加一个一样的盒子 缩放 0.8-1 透明度从0-1 图片为下一首歌的图
+        // pic放大1-1.2 透明度1-0 然后删除
+        var newDiv = document.createElement("div");
+        newDiv.classList.add("pic");
+        newDiv.innerHTML =
+          '<img class="before" src="./imgs/' +
+          nowMusic +
+          '.jpg" /><img src="./imgs/' +
+          nowMusic +
+          '.jpg" />';
+        // 把这个新盒子加在旧盒子后
+        bigImgBox.insertAdjacentElement("afterend", newDiv);
+        animationFinish = false;
+        // 让新盒子从小到大再显示
+        newDiv.style.animation = "small .3s linear";
+        // 让旧盒子从小到大再消失
+        bigImgBox.style.animation = "smaller .3s linear";
+        play();
+        // 延迟一秒让动画完成
+        setTimeout(function () {
+          // 移除旧pic盒子
+          bigImgBox.remove();
+          // 重新定义pic盒子
+          bigImgBox = document.querySelector(".pic");
+          // 获取总时长 要延迟一下 一开始的时间是错的
+          totalTimeDiv.innerHTML = timeChange(music.duration);
+          animationFinish = true;
+        }, 300);
+      }
+    };
+  </script>
+</html>

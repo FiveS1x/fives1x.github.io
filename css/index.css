@@ -108,6 +108,14 @@ section .title h3 {
     opacity: 0.6;
   }
 }
+section .card {
+  font-family: "得意黑";
+  font-weight: normal;
+  color: white;
+  font-size: 1.25rem;
+  background-color: #299cdd;
+  border: 0;
+}
 .recentlyWork {
   width: 80vw;
 }
@@ -121,7 +129,7 @@ section .title h3 {
   text-decoration: none;
   text-align: center;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
 .recentlyWork .content a .card {
   width: 38vw;
@@ -131,14 +139,44 @@ section .title h3 {
     width: 80vw;
   }
 }
+.htmlAndCss .content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.htmlAndCss .content a {
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+.htmlAndCss .content a .card {
+  width: 38vw;
+}
+@media (max-width: 743px) {
+  .htmlAndCss .content a .card {
+    width: 80vw;
+  }
+}
 .widget .content {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
-.widget .content .info-box {
+.widget .content a {
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+.widget .content a .card {
   width: 25vw;
 }
-.widget .content .info-box img {
-  width: 100%;
+@media (max-width: 743px) {
+  .widget .content a .card {
+    width: 80vw;
+  }
 }
 /*# sourceMappingURL=./index.css.map */
