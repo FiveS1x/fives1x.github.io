@@ -14,3 +14,7 @@ window.onscroll = function () {
 };
 
 var navLink = document.querySelectorAll(".nav-item");
+
+window.onresize = function () {
+  location.reload();
+};
