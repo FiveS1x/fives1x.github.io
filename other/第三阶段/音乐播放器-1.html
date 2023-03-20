@@ -143,6 +143,10 @@
       }
     };
 
+    music.oncanplay = function () {
+      totalTimeDiv.innerHTML = timeChange(music.duration);
+    };
+
     var nowMusic = 0; //初始音乐序号为0
     var nextMusic = document.querySelector(".icon-xiayiji");
     var lastMusic = document.querySelector(".icon-shangyiji");
