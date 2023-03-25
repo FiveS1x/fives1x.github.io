@@ -1,0 +1,460 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+header {
+  background: url(../imgs/bg.jpg) no-repeat;
+  background-size: cover;
+  height: 800px;
+  padding-top: 50px;
+}
+header .navbar {
+  background-color: transparent !important;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+@media (max-width: 992px) {
+  header .navbar {
+    background-color: white !important;
+  }
+}
+header .navbar .navbar-brand {
+  width: 10vw;
+}
+header .navbar .navbar-brand img {
+  width: 100%;
+}
+header .navbar .navbar-nav {
+  margin: 0 auto !important;
+}
+header .navbar .navbar-nav li {
+  user-select: none;
+  margin: 0 1rem;
+}
+header .navbar .navbar-nav li.active .nav-link {
+  color: #d82a4e;
+}
+header .navbar .navbar-nav li .nav-link {
+  color: white;
+}
+@media (max-width: 992px) {
+  header .navbar .navbar-nav li .nav-link {
+    color: black;
+    font-weight: 400;
+  }
+}
+header .navbar .navbar-nav li .nav-link:hover {
+  cursor: pointer;
+  color: #d82a4e;
+}
+header .navbar .btn-outline-success {
+  background-color: #d82a4e;
+  color: white;
+  font-weight: 400;
+  border: 1px solid #d82a4e;
+  padding: 10px 30px;
+}
+@media (max-width: 992px) {
+  header .navbar .btn-outline-success {
+    display: none;
+  }
+}
+header h2 {
+  color: white;
+  text-align: center;
+  margin-top: 12rem;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  user-select: none;
+}
+header h3 {
+  color: white;
+  font-weight: 400;
+  text-align: center;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  user-select: none;
+}
+main section {
+  padding: 115px 0;
+}
+main .classType h2 {
+  text-align: center;
+  font-weight: 600;
+}
+main .classType p.detail {
+  margin-top: 10px;
+  padding: 0 3rem;
+  text-align: center;
+}
+main .classType .kinds {
+  margin-top: 4rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+main .classType .kinds .card {
+  margin-bottom: 3rem;
+}
+main .classType .kinds .card .card-body {
+  background-color: #edf4f6;
+  padding: 40px 35px;
+}
+main .classType .kinds .card .card-body h5 {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+main .classType .kinds .card .card-body p {
+  margin-bottom: 16px;
+}
+main .classType .kinds .card .card-body .much {
+  font-weight: 600;
+  color: #d82a4e;
+  font-size: 18px;
+}
+main .classType .kinds .card .card-body:hover {
+  background-color: #d82a4e;
+  color: white;
+}
+main .classType .kinds .card .card-body:hover .much {
+  color: white;
+}
+main .selectClass {
+  padding: 60px 0 50px 0;
+  background-color: #d82a4e;
+  color: white;
+}
+@media only screen and (max-width: 767px) {
+  main .selectClass {
+    padding: 40px 30px 30px;
+  }
+}
+main .selectClass h2 {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+main .selectClass .select {
+  margin: 0 auto;
+  padding: 44px 38px;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+main .selectClass .select input {
+  display: block;
+  height: 56px;
+  width: 36.6%;
+  padding: 0 30px;
+  margin-right: 18px;
+  background-color: #edf4f6;
+  border: 0;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  main .selectClass .select input {
+    width: 34.6%;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  main .selectClass .select input {
+    width: 45%;
+    margin-bottom: 20px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  main .selectClass .select input {
+    width: 100%;
+    margin-bottom: 20px;
+    margin-right: 0;
+  }
+}
+main .selectClass .select button {
+  display: block;
+  min-width: 198px;
+  padding: 16px 10px;
+  border: 0;
+  background-color: #d82a4e;
+  color: white;
+  font-weight: 600;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  main .selectClass .select button {
+    min-width: 173px;
+  }
+}
+main .adviseClass h2 {
+  font-size: 48px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  text-align: center;
+}
+main .adviseClass .detail {
+  text-align: center;
+}
+main .adviseClass .advise .menu {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  text-align: center;
+  padding-top: 50px;
+  margin-bottom: 60px;
+}
+main .adviseClass .advise .menu li {
+  font-size: 18px;
+  font-weight: 600;
+  color: #474747;
+  padding: 12px 10px 5px;
+  margin: 0 10px;
+  border-bottom: 4px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+main .adviseClass .advise .menu li.active {
+  color: #d82a4e;
+  border-bottom: 4px solid #d82a4e;
+}
+main .adviseClass .advise .content {
+  display: flex;
+  flex-wrap: wrap;
+}
+main .adviseClass .advise .content .card {
+  margin-bottom: 30px;
+  position: relative;
+}
+main .adviseClass .advise .content .card .price {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 600;
+  background: #d82a4e;
+  padding: 13px 19px;
+}
+main .adviseClass .advise .content .card .card-body {
+  padding: 45px 33px 25px;
+  background-color: #edf4f6;
+}
+main .adviseClass .advise .content .card .card-body h5 {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+main .adviseClass .advise .content .card .card-body .much {
+  font-weight: 600;
+  color: #d82a4e;
+  font-size: 18px;
+}
+main .adviseClass .advise .content .card .card-body p {
+  margin-bottom: 16px;
+  font-size: 14.1px;
+  color: #878787;
+  line-height: 2.2;
+  font-weight: 500;
+}
+main .adviseClass .advise .content .card .teacher {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  background-color: #edf4f6;
+  border-top: 1px solid #d4dee1;
+  padding: 14px 33px;
+  overflow: hidden;
+}
+main .adviseClass .advise .content .card .teacher .photo {
+  background: url(../imgs/teacher.jpg) no-repeat;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-size: cover;
+}
+main .adviseClass .advise .content .card .teacher .info {
+  padding-left: 18px;
+  font-weight: 600;
+  color: #878787;
+  overflow: hidden;
+}
+main .adviseClass .advise .content .card .teacher .info.text-truncate-2 {
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+main .adviseClass .advise .content .card .teacher .info span {
+  color: #d82a4e;
+  font-weight: 600;
+}
+main .techReg {
+  display: flex;
+  background-color: #d82a4e;
+  position: relative;
+}
+main .techReg .left {
+  color: white;
+  padding: 0 5rem;
+  width: 50%;
+  background-color: #d82a4e;
+}
+@media (max-width: 992px) {
+  main .techReg .left {
+    flex: 1;
+  }
+}
+@media (max-width: 576px) {
+  main .techReg .left {
+    padding: 1rem;
+  }
+}
+main .techReg .left h3 {
+  font-weight: 600;
+}
+main .techReg .left .detail {
+  font-size: 14px;
+  margin: 2rem 0;
+}
+main .techReg .left .info {
+  background-color: #fff;
+  padding: 2rem;
+}
+main .techReg .left .info .dataInput {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  height: 2.5rem;
+  padding: 15px;
+  font-size: 14px;
+  background-color: #edf4f6;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  outline: 0;
+}
+main .techReg .left .info .dataInput:focus {
+  border-bottom: 2px solid #d82a4e;
+}
+main .techReg .left .info button {
+  background-color: #d82a4e;
+  border: 0;
+  color: white;
+  width: 30%;
+  height: 3rem;
+  outline: none;
+}
+main .techReg .right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: url(../imgs/signup-bg.jpg) no-repeat;
+  background-size: cover;
+}
+@media (max-width: 992px) {
+  main .techReg .right {
+    display: none;
+  }
+}
+main .joinUs {
+  border-bottom: 3px solid #d82a4e;
+}
+main .joinUs h2 {
+  font-weight: 600;
+  color: #474747;
+  text-align: center;
+  margin-bottom: 25px;
+}
+main .joinUs .detail {
+  text-align: center;
+  margin: 0 auto;
+  width: 63vw;
+}
+main .joinUs button {
+  display: block;
+  min-width: 196px;
+  height: 4rem;
+  font-size: 14px;
+  margin: 0 auto;
+  margin-top: 48px;
+  border: 0;
+  outline: none;
+  background-color: #d82a4e;
+  color: white;
+  font-weight: 600;
+}
+footer {
+  list-style: none;
+  padding-top: 115px;
+}
+footer .top {
+  padding-left: 10vw;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+footer .top .oneList {
+  padding: 0 15px;
+}
+@media (min-width: 768px) {
+  footer .top .oneList {
+    flex: 1;
+  }
+}
+@media (max-width: 767px) {
+  footer .top .oneList {
+    width: 50%;
+    margin-bottom: 50px;
+  }
+}
+@media (max-width: 576px) {
+  footer .top .oneList {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+}
+footer .top .oneList h4 {
+  font-weight: 600;
+  font-size: 24px;
+  color: #474747;
+  margin-bottom: 30px;
+}
+footer .top .oneList ul {
+  padding-top: 30px;
+}
+footer .top .oneList ul li {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #878787;
+}
+footer .top .oneList ul span {
+  color: #d82a4e;
+  font-weight: 600;
+}
+footer .bottom {
+  background-color: #edf4f6;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #474747;
+  padding: 20px 0;
+  margin-top: 50px;
+}
+footer .bottom .left {
+  font-size: 14px;
+  font-weight: 600;
+  color: #474747;
+}
+footer .bottom ul {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+footer .bottom ul li a {
+  color: #474747;
+  text-decoration: none;
+  padding: 0 0.5rem;
+}
+/*# sourceMappingURL=./index.css.map */

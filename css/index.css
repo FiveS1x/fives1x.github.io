@@ -54,10 +54,14 @@ nav .dropdown-menu {
 header {
   width: 100%;
   background-image: linear-gradient(#2eb5fd, #194c78);
-  height: 100vh;
+  height: 800px;
+  position: relative;
 }
 header .typing {
-  padding: 10rem 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
   font-size: 30vw;
   user-select: none;
@@ -67,7 +71,6 @@ header .typing {
 }
 @media (min-width: 992px) {
   header .typing {
-    padding-top: 12rem;
     font-size: 15rem;
   }
 }
@@ -149,7 +152,7 @@ section .card {
   text-decoration: none;
   text-align: center;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
 }
 .htmlAndCss .content a .card {
   width: 38vw;
